@@ -8,6 +8,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+bin/
+etc/
 build/
 develop-eggs/
 dist/
@@ -77,6 +79,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+share/
 
 # IPython
 profile_default/
@@ -127,6 +130,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+pyvenv.cfg
 
 # Spyder project settings
 .spyderproject
