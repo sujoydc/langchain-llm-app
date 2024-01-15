@@ -1,6 +1,10 @@
 from langchain_openai import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
+from langchain.agents import load_tools
+from langchain.agents import initialize_agent
+from langchain.agents import AgentType
+
 from dotenv import load_dotenv
 
 # This loads the .env file which has the API Key
@@ -23,7 +27,23 @@ def generate_company_name(company_type, response_number, max_char):
 
     return response
 
+def langchain_agent():
+    llm = OpenAI(temperature=0.5)
+
+    tools = load_tools(["wikipedia", "llm-math"], llm=llm)
+    
+    agent = initialize_agent(
+        tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True
+    )
+
+    result = agent.run(
+        "How many of these companies are based in USA? Multiply this by 5."
+    )
+
+    print(result)
+
 if __name__ == "__main__":
-    print(generate_company_name("AI", 3, 7))
+    #print(generate_company_name("AI", 3, 7))
+    print(langchain_agent())
 
     
